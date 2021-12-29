@@ -1,6 +1,6 @@
 {
   "name": "rmc-react-spring",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "scripts": {
     "build": "rollup -c ./config/rollup.config.js"
@@ -26,11 +26,8 @@
     "react-dom": "^17.0.2"
   },
   "browserslist": [
-    "last 2 Chrome versions",
-    "ie >= 11",
-    "Firefox >= 20",
-    "iOS 9",
-    "> 5%"
+    "IE 11",
+    "iOS 9"
   ],
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js"

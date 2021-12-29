@@ -1,15 +1,57 @@
-import _slicedToArray from '@babel/runtime/helpers/slicedToArray';
-import _createClass from '@babel/runtime/helpers/createClass';
-import _classCallCheck from '@babel/runtime/helpers/classCallCheck';
-import _inherits from '@babel/runtime/helpers/inherits';
-import _possibleConstructorReturn from '@babel/runtime/helpers/possibleConstructorReturn';
-import _getPrototypeOf from '@babel/runtime/helpers/getPrototypeOf';
-import _assertThisInitialized from '@babel/runtime/helpers/assertThisInitialized';
-import _toConsumableArray from '@babel/runtime/helpers/toConsumableArray';
-import _get from '@babel/runtime/helpers/get';
-import _wrapNativeSuper from '@babel/runtime/helpers/wrapNativeSuper';
-import _asyncToGenerator from '@babel/runtime/helpers/asyncToGenerator';
-import _regeneratorRuntime from '@babel/runtime/regenerator';
+import _Reflect$construct from '@babel/runtime-corejs3/core-js-stable/reflect/construct';
+import _slicedToArray from '@babel/runtime-corejs3/helpers/slicedToArray';
+import _createClass from '@babel/runtime-corejs3/helpers/createClass';
+import _classCallCheck from '@babel/runtime-corejs3/helpers/classCallCheck';
+import _inherits from '@babel/runtime-corejs3/helpers/inherits';
+import _possibleConstructorReturn from '@babel/runtime-corejs3/helpers/possibleConstructorReturn';
+import _getPrototypeOf from '@babel/runtime-corejs3/helpers/getPrototypeOf';
+import 'core-js/modules/es.regexp.exec.js';
+import 'core-js/modules/es.string.replace.js';
+import 'core-js/modules/es.object.to-string.js';
+import 'core-js/modules/web.dom-collections.for-each.js';
+import 'core-js/modules/es.array.join.js';
+import 'core-js/modules/es.promise.js';
+import _Object$keys from '@babel/runtime-corejs3/core-js-stable/object/keys';
+import _trimInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/trim';
+import _Object$values from '@babel/runtime-corejs3/core-js-stable/object/values';
+import _mapInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/map';
+import _concatInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/concat';
+import _startsWithInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/starts-with';
+import _Symbol from '@babel/runtime-corejs3/core-js-stable/symbol';
+import _getIteratorMethod from '@babel/runtime-corejs3/core-js/get-iterator-method';
+import _assertThisInitialized from '@babel/runtime-corejs3/helpers/assertThisInitialized';
+import _toConsumableArray from '@babel/runtime-corejs3/helpers/toConsumableArray';
+import _get from '@babel/runtime-corejs3/helpers/get';
+import _wrapNativeSuper from '@babel/runtime-corejs3/helpers/wrapNativeSuper';
+import _asyncToGenerator from '@babel/runtime-corejs3/helpers/asyncToGenerator';
+import _regeneratorRuntime from '@babel/runtime-corejs3/regenerator';
+import _Object$getOwnPropertyDescriptor from '@babel/runtime-corejs3/core-js-stable/object/get-own-property-descriptor';
+import _Object$freeze from '@babel/runtime-corejs3/core-js-stable/object/freeze';
+import _Object$assign from '@babel/runtime-corejs3/core-js-stable/object/assign';
+import _includesInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/includes';
+import _Promise from '@babel/runtime-corejs3/core-js-stable/promise';
+import _sortInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/sort';
+import _Symbol$for from '@babel/runtime-corejs3/core-js-stable/symbol/for';
+import _Set from '@babel/runtime-corejs3/core-js-stable/set';
+import _valuesInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/values';
+import _Number$isNaN from '@babel/runtime-corejs3/core-js-stable/number/is-nan';
+import _reverseInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/reverse';
+import _Object$isFrozen from '@babel/runtime-corejs3/core-js-stable/object/is-frozen';
+import _Array$from from '@babel/runtime-corejs3/core-js-stable/array/from';
+import _Map from '@babel/runtime-corejs3/core-js-stable/map';
+import _keysInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/keys';
+import _spliceInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/splice';
+import _sliceInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/slice';
+import _findInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/find';
+import 'core-js/modules/es.array.iterator.js';
+import 'core-js/modules/es.string.iterator.js';
+import 'core-js/modules/web.dom-collections.iterator.js';
+import 'core-js/modules/es.function.name.js';
+import _findIndexInstanceProperty from '@babel/runtime-corejs3/core-js-stable/instance/find-index';
+import 'core-js/modules/es.regexp.constructor.js';
+import 'core-js/modules/es.regexp.to-string.js';
+import 'core-js/modules/es.string.match.js';
+import 'core-js/modules/es.number.constructor.js';
 import require$$1 from 'react';
 import require$$1$1 from 'react-dom';
 
@@ -75,10 +117,11 @@ raf.setTimeout = function (handler, ms) {
   var time = raf.now() + ms;
 
   var cancel = function cancel() {
-    var i = timeouts.findIndex(function (t) {
+    var i = _findIndexInstanceProperty(timeouts).call(timeouts, function (t) {
       return t.cancel == cancel;
     });
-    if (~i) timeouts.splice(i, 1);
+
+    if (~i) _spliceInstanceProperty(timeouts).call(timeouts, i, 1);
     __raf.count -= ~i ? 1 : 0;
   };
 
@@ -87,14 +130,16 @@ raf.setTimeout = function (handler, ms) {
     handler: handler,
     cancel: cancel
   };
-  timeouts.splice(findTimeout(time), 0, timeout);
+
+  _spliceInstanceProperty(timeouts).call(timeouts, findTimeout(time), 0, timeout);
+
   __raf.count += 1;
   start();
   return timeout;
 };
 
 var findTimeout = function findTimeout(time) {
-  return ~(~timeouts.findIndex(function (t) {
+  return ~(~_findIndexInstanceProperty(timeouts).call(timeouts, function (t) {
     return t.time > time;
   }) || ~timeouts.length);
 };
@@ -201,7 +246,7 @@ function update() {
   var count = findTimeout(ts);
 
   if (count) {
-    eachSafely(timeouts.splice(0, count), function (t) {
+    eachSafely(_spliceInstanceProperty(timeouts).call(timeouts, 0, count), function (t) {
       return t.handler();
     });
     __raf.count -= count;
@@ -215,7 +260,7 @@ function update() {
 }
 
 function makeQueue() {
-  var next = new Set();
+  var next = new _Set();
   var current = next;
   return {
     add: function add(fn) {
@@ -228,7 +273,7 @@ function makeQueue() {
     },
     flush: function flush(arg) {
       if (current.size) {
-        next = new Set();
+        next = new _Set();
         __raf.count -= current.size;
         eachSafely(current, function (fn) {
           return fn(arg) && next.add(fn);
@@ -281,9 +326,10 @@ reactSpringRafz_cjs_prod.raf = raf;
     var n = Object.create(null);
 
     if (e) {
-      Object.keys(e).forEach(function (k) {
+      _Object$keys(e).forEach(function (k) {
         if (k !== 'default') {
-          var d = Object.getOwnPropertyDescriptor(e, k);
+          var d = _Object$getOwnPropertyDescriptor(e, k);
+
           Object.defineProperty(n, k, d.get ? d : {
             enumerable: true,
             get: function get() {
@@ -295,7 +341,7 @@ reactSpringRafz_cjs_prod.raf = raf;
     }
 
     n['default'] = e;
-    return Object.freeze(n);
+    return _Object$freeze(n);
   }
 
   var React__namespace = /*#__PURE__*/_interopNamespace(React);
@@ -369,7 +415,8 @@ reactSpringRafz_cjs_prod.raf = raf;
 
   function flush(queue, iterator) {
     if (queue.size) {
-      var items = Array.from(queue);
+      var items = _Array$from(queue);
+
       queue.clear();
       each(items, iterator);
     }
@@ -403,7 +450,7 @@ reactSpringRafz_cjs_prod.raf = raf;
     if (globals.frameLoop) rafz.raf.frameLoop = globals.frameLoop;
   };
 
-  var globals = /*#__PURE__*/Object.freeze({
+  var globals = /*#__PURE__*/_Object$freeze({
     __proto__: null,
 
     get createStringInterpolator() {
@@ -428,7 +475,8 @@ reactSpringRafz_cjs_prod.raf = raf;
 
     assign: assign
   });
-  var startQueue = new Set();
+
+  var startQueue = new _Set();
   var currentFrame = [];
   var prevFrame = [];
   var priority = 0;
@@ -450,13 +498,14 @@ reactSpringRafz_cjs_prod.raf = raf;
     sort: function sort(animation) {
       if (priority) {
         rafz.raf.onFrame(function () {
-          return frameLoop.sort(animation);
+          return _sortInstanceProperty(frameLoop).call(frameLoop, animation);
         });
       } else {
         var prevIndex = currentFrame.indexOf(animation);
 
         if (~prevIndex) {
-          currentFrame.splice(prevIndex, 1);
+          _spliceInstanceProperty(currentFrame).call(currentFrame, prevIndex, 1);
+
           startUnsafely(animation);
         }
       }
@@ -474,11 +523,11 @@ reactSpringRafz_cjs_prod.raf = raf;
   }
 
   function startSafely(animation) {
-    if (!currentFrame.includes(animation)) startUnsafely(animation);
+    if (!_includesInstanceProperty(currentFrame).call(currentFrame, animation)) startUnsafely(animation);
   }
 
   function startUnsafely(animation) {
-    currentFrame.splice(findIndex(currentFrame, function (other) {
+    _spliceInstanceProperty(currentFrame).call(currentFrame, findIndex(currentFrame, function (other) {
       return other.priority > animation.priority;
     }), 0, animation);
   }
@@ -508,7 +557,8 @@ reactSpringRafz_cjs_prod.raf = raf;
   }
 
   function findIndex(arr, test) {
-    var index = arr.findIndex(test);
+    var index = _findIndexInstanceProperty(arr).call(arr, test);
+
     return index < 0 ? arr.length : index;
   }
 
@@ -771,6 +821,8 @@ reactSpringRafz_cjs_prod.raf = raf;
   }
 
   function colorToRgba(input) {
+    var _context, _context2, _context3;
+
     var int32Color = normalizeColor(input);
     if (int32Color === null) return input;
     int32Color = int32Color || 0;
@@ -778,7 +830,7 @@ reactSpringRafz_cjs_prod.raf = raf;
     var g = (int32Color & 0x00ff0000) >>> 16;
     var b = (int32Color & 0x0000ff00) >>> 8;
     var a = (int32Color & 0x000000ff) / 255;
-    return "rgba(".concat(r, ", ").concat(g, ", ").concat(b, ", ").concat(a, ")");
+    return _concatInstanceProperty(_context = _concatInstanceProperty(_context2 = _concatInstanceProperty(_context3 = "rgba(".concat(r, ", ")).call(_context3, g, ", ")).call(_context2, b, ", ")).call(_context, a, ")");
   }
 
   var createInterpolator = function createInterpolator(range, output, extrapolate) {
@@ -810,7 +862,7 @@ reactSpringRafz_cjs_prod.raf = raf;
 
     return function (input) {
       var range = findRange(input, inputRange);
-      return interpolate(input, inputRange[range], inputRange[range + 1], outputRange[range], outputRange[range + 1], easing, extrapolateLeft, extrapolateRight, config.map);
+      return interpolate(input, inputRange[range], inputRange[range + 1], outputRange[range], outputRange[range + 1], easing, extrapolateLeft, extrapolateRight, _mapInstanceProperty(config));
     };
   };
 
@@ -842,7 +894,7 @@ reactSpringRafz_cjs_prod.raf = raf;
   }
 
   function _extends() {
-    _extends = Object.assign || function (target) {
+    _extends = _Object$assign || function (target) {
       for (var i = 1; i < arguments.length; i++) {
         var source = arguments[i];
 
@@ -859,8 +911,9 @@ reactSpringRafz_cjs_prod.raf = raf;
     return _extends.apply(this, arguments);
   }
 
-  var $get = Symbol.for('FluidValue.get');
-  var $observers = Symbol.for('FluidValue.observers');
+  var $get = _Symbol$for('FluidValue.get');
+
+  var $observers = _Symbol$for('FluidValue.observers');
 
   var hasFluidValue = function hasFluidValue(arg) {
     return Boolean(arg && arg[$get]);
@@ -914,7 +967,7 @@ reactSpringRafz_cjs_prod.raf = raf;
       var observers = target[$observers];
 
       if (!observers) {
-        setHidden(target, $observers, observers = new Set());
+        setHidden(target, $observers, observers = new _Set());
       }
 
       if (!observers.has(observer)) {
@@ -962,19 +1015,28 @@ reactSpringRafz_cjs_prod.raf = raf;
   var rgbaRegex = /rgba\(([0-9\.-]+), ([0-9\.-]+), ([0-9\.-]+), ([0-9\.-]+)\)/gi;
 
   var rgbaRound = function rgbaRound(_, p1, p2, p3, p4) {
-    return "rgba(".concat(Math.round(p1), ", ").concat(Math.round(p2), ", ").concat(Math.round(p3), ", ").concat(p4, ")");
+    var _context4, _context5, _context6;
+
+    return _concatInstanceProperty(_context4 = _concatInstanceProperty(_context5 = _concatInstanceProperty(_context6 = "rgba(".concat(Math.round(p1), ", ")).call(_context6, Math.round(p2), ", ")).call(_context5, Math.round(p3), ", ")).call(_context4, p4, ")");
   };
 
   var createStringInterpolator = function createStringInterpolator(config) {
-    if (!namedColorRegex) namedColorRegex = colors$1 ? new RegExp("(".concat(Object.keys(colors$1).join('|'), ")(?!\\w)"), 'g') : /^\b$/;
-    var output = config.output.map(function (value) {
+    var _context7, _context9;
+
+    if (!namedColorRegex) namedColorRegex = colors$1 ? new RegExp("(".concat(_Object$keys(colors$1).join('|'), ")(?!\\w)"), 'g') : /^\b$/;
+
+    var output = _mapInstanceProperty(_context7 = config.output).call(_context7, function (value) {
       return getFluidValue(value).replace(colorRegex, colorToRgba).replace(namedColorRegex, colorToRgba);
     });
-    var keyframes = output.map(function (value) {
-      return value.match(numberRegex).map(Number);
+
+    var keyframes = _mapInstanceProperty(output).call(output, function (value) {
+      var _context8;
+
+      return _mapInstanceProperty(_context8 = value.match(numberRegex)).call(_context8, Number);
     });
-    var outputRanges = keyframes[0].map(function (_, i) {
-      return keyframes.map(function (values) {
+
+    var outputRanges = _mapInstanceProperty(_context9 = keyframes[0]).call(_context9, function (_, i) {
+      return _mapInstanceProperty(keyframes).call(keyframes, function (values) {
         if (!(i in values)) {
           throw Error('The arity of each "output" value must be equal');
         }
@@ -982,20 +1044,24 @@ reactSpringRafz_cjs_prod.raf = raf;
         return values[i];
       });
     });
-    var interpolators = outputRanges.map(function (output) {
+
+    var interpolators = _mapInstanceProperty(outputRanges).call(outputRanges, function (output) {
       return createInterpolator(_extends({}, config, {
         output: output
       }));
     });
+
     return function (input) {
       var _output$find;
 
-      var missingUnit = !unitRegex.test(output[0]) && ((_output$find = output.find(function (value) {
+      var missingUnit = !unitRegex.test(output[0]) && ((_output$find = _findInstanceProperty(output).call(output, function (value) {
         return unitRegex.test(value);
       })) == null ? void 0 : _output$find.replace(numberRegex, ''));
       var i = 0;
       return output[0].replace(numberRegex, function () {
-        return "".concat(interpolators[i++](input)).concat(missingUnit || '');
+        var _context10;
+
+        return _concatInstanceProperty(_context10 = "".concat(interpolators[i++](input))).call(_context10, missingUnit || '');
       }).replace(rgbaRegex, rgbaRound);
     };
   };
@@ -1173,9 +1239,9 @@ reactSpringRafz_cjs_prod.raf = raf;
 
 var reactSpringAnimated_cjs_prod = {};
 
-function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper$2(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$2(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = _Reflect$construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct$2() { if (typeof Reflect === "undefined" || !_Reflect$construct) return false; if (_Reflect$construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(_Reflect$construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 Object.defineProperty(reactSpringAnimated_cjs_prod, '__esModule', {
   value: true
@@ -1188,9 +1254,10 @@ function _interopNamespace(e) {
   var n = Object.create(null);
 
   if (e) {
-    Object.keys(e).forEach(function (k) {
+    _Object$keys(e).forEach(function (k) {
       if (k !== 'default') {
-        var d = Object.getOwnPropertyDescriptor(e, k);
+        var d = _Object$getOwnPropertyDescriptor(e, k);
+
         Object.defineProperty(n, k, d.get ? d : {
           enumerable: true,
           get: function get() {
@@ -1202,12 +1269,12 @@ function _interopNamespace(e) {
   }
 
   n['default'] = e;
-  return Object.freeze(n);
+  return _Object$freeze(n);
 }
 
 var React__namespace = /*#__PURE__*/_interopNamespace(React);
 
-var $node = Symbol.for('Animated:node');
+var $node = _Symbol$for('Animated:node');
 
 var isAnimated = function isAnimated(value) {
   return !!value && value[$node] === value;
@@ -1447,9 +1514,9 @@ var AnimatedObject = /*#__PURE__*/function (_Animated2) {
     key: "_makePayload",
     value: function _makePayload(source) {
       if (source) {
-        var payload = new Set();
+        var payload = new _Set();
         shared.eachProp(source, this._addToPayload, payload);
-        return Array.from(payload);
+        return _Array$from(payload);
       }
     }
   }, {
@@ -1488,7 +1555,9 @@ var AnimatedArray = /*#__PURE__*/function (_AnimatedObject) {
   _createClass(AnimatedArray, [{
     key: "getValue",
     value: function getValue() {
-      return this.source.map(function (node) {
+      var _context;
+
+      return _mapInstanceProperty(_context = this.source).call(_context, function (node) {
         return node.getValue();
       });
     }
@@ -1498,12 +1567,12 @@ var AnimatedArray = /*#__PURE__*/function (_AnimatedObject) {
       var payload = this.getPayload();
 
       if (source.length == payload.length) {
-        return payload.map(function (node, i) {
+        return _mapInstanceProperty(payload).call(payload, function (node, i) {
           return node.setValue(source[i]);
         }).some(Boolean);
       }
 
-      _get(_getPrototypeOf(AnimatedArray.prototype), "setValue", this).call(this, source.map(makeAnimated));
+      _get(_getPrototypeOf(AnimatedArray.prototype), "setValue", this).call(this, _mapInstanceProperty(source).call(source, makeAnimated));
 
       return true;
     }
@@ -1528,7 +1597,7 @@ function getAnimatedType(value) {
 }
 
 function _extends() {
-  _extends = Object.assign || function (target) {
+  _extends = _Object$assign || function (target) {
     for (var i = 1; i < arguments.length; i++) {
       var source = arguments[i];
 
@@ -1627,7 +1696,7 @@ var PropsObserver = /*#__PURE__*/function () {
 }();
 
 function getAnimatedState(props, host) {
-  var dependencies = new Set();
+  var dependencies = new _Set();
   TreeContext.dependencies = dependencies;
   if (props.style) props = _extends({}, props, {
     style: host.createAnimatedStyle(props.style)
@@ -1645,7 +1714,7 @@ function updateRef(ref, value) {
   return value;
 }
 
-var cacheKey = Symbol.for('AnimatedComponent');
+var cacheKey = _Symbol$for('AnimatedComponent');
 
 var createHost = function createHost(components) {
   var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
@@ -1721,13 +1790,13 @@ var interpolation = /*#__PURE__*/Object.freeze({
 
 var require$$4 = /*@__PURE__*/getAugmentedNamespace(interpolation);
 
-function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper$1(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct$1(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = _Reflect$construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct$1() { if (typeof Reflect === "undefined" || !_Reflect$construct) return false; if (_Reflect$construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(_Reflect$construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof _Symbol !== "undefined" && _getIteratorMethod(o) || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { var _context18; if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = _sliceInstanceProperty(_context18 = Object.prototype.toString.call(o)).call(_context18, 8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return _Array$from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
@@ -1747,9 +1816,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var n = Object.create(null);
 
     if (e) {
-      Object.keys(e).forEach(function (k) {
+      _Object$keys(e).forEach(function (k) {
         if (k !== 'default') {
-          var d = Object.getOwnPropertyDescriptor(e, k);
+          var d = _Object$getOwnPropertyDescriptor(e, k);
+
           Object.defineProperty(n, k, d.get ? d : {
             enumerable: true,
             get: function get() {
@@ -1761,13 +1831,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
 
     n['default'] = e;
-    return Object.freeze(n);
+    return _Object$freeze(n);
   }
 
   var React__namespace = /*#__PURE__*/_interopNamespace(React);
 
   function _extends() {
-    _extends = Object.assign || function (target) {
+    _extends = _Object$assign || function (target) {
       for (var i = 1; i < arguments.length; i++) {
         var source = arguments[i];
 
@@ -1793,7 +1863,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }
 
   var matchProp = function matchProp(value, key) {
-    return value === true || !!(key && value && (shared.is.fun(value) ? value(key) : shared.toArray(value).includes(key)));
+    var _context;
+
+    return value === true || !!(key && value && (shared.is.fun(value) ? value(key) : _includesInstanceProperty(_context = shared.toArray(value)).call(_context, key)));
   };
 
   var resolveProp = function resolveProp(prop, key) {
@@ -1814,7 +1886,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     if (props.default && props.default !== true) {
       props = props.default;
-      keys = Object.keys(props);
+      keys = _Object$keys(props);
     }
 
     var defaults = {};
@@ -1909,7 +1981,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   function computeGoal(value) {
     value = shared.getFluidValue(value);
-    return shared.is.arr(value) ? value.map(computeGoal) : shared.isAnimatedString(value) ? shared.Globals.createStringInterpolator({
+    return shared.is.arr(value) ? _mapInstanceProperty(value).call(value, computeGoal) : shared.isAnimatedString(value) ? shared.Globals.createStringInterpolator({
       range: [0, 1],
       output: [value, value]
     })(1) : value;
@@ -1968,23 +2040,25 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         });
       } else {
-        var p = Promise.resolve();
+        var p = _Promise.resolve();
+
         shared.each(refs, function (ref) {
           var controllers = ref.current;
 
           if (controllers.length) {
-            var queues = controllers.map(function (ctrl) {
+            var queues = _mapInstanceProperty(controllers).call(controllers, function (ctrl) {
               var q = ctrl.queue;
               ctrl.queue = [];
               return q;
             });
+
             p = p.then(function () {
               shared.each(controllers, function (ctrl, i) {
                 return shared.each(queues[i] || [], function (update) {
                   return ctrl.queue.push(update);
                 });
               });
-              return Promise.all(ref.start());
+              return _Promise.all(ref.start());
             });
           }
         });
@@ -2048,7 +2122,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     this.bounce = void 0;
     this.decay = void 0;
     this.round = void 0;
-    Object.assign(this, defaults);
+
+    _Object$assign(this, defaults);
   });
 
   function mergeConfig(config, newConfig, defaultConfig) {
@@ -2059,7 +2134,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
 
     sanitizeConfig(config, newConfig);
-    Object.assign(config, newConfig);
+
+    _Object$assign(config, newConfig);
 
     for (var key in defaults) {
       if (config[key] == null) {
@@ -2119,7 +2195,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         defaultProps = _ref2.defaultProps,
         state = _ref2.state,
         actions = _ref2.actions;
-    return new Promise(function (resolve, reject) {
+    return new _Promise(function (resolve, reject) {
       var _props$cancel;
 
       var delay;
@@ -2236,16 +2312,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     return state.promise = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee3() {
       var defaultProps, preventBail, bail, bailPromise, bailIfEnded, animate, result, animating;
-      return _regeneratorRuntime.wrap(function _callee3$(_context3) {
+      return _regeneratorRuntime.wrap(function _callee3$(_context4) {
         while (1) {
-          switch (_context3.prev = _context3.next) {
+          switch (_context4.prev = _context4.next) {
             case 0:
               state.asyncId = callId;
               state.asyncTo = to;
               defaultProps = getDefaultProps(props, function (value, key) {
                 return key === 'onRest' ? undefined : value;
               });
-              bailPromise = new Promise(function (resolve, reject) {
+              bailPromise = new _Promise(function (resolve, reject) {
                 return preventBail = resolve, bail = reject;
               });
 
@@ -2264,12 +2340,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 var skipAnimationSignal = new SkipAniamtionSignal();
                 return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
                   var props, result;
-                  return _regeneratorRuntime.wrap(function _callee$(_context) {
+                  return _regeneratorRuntime.wrap(function _callee$(_context2) {
                     while (1) {
-                      switch (_context.prev = _context.next) {
+                      switch (_context2.prev = _context2.next) {
                         case 0:
                           if (!shared.Globals.skipAnimation) {
-                            _context.next = 5;
+                            _context2.next = 5;
                             break;
                           }
 
@@ -2289,29 +2365,29 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                               props[key] = value;
                             }
                           });
-                          _context.next = 11;
+                          _context2.next = 11;
                           return target.start(props);
 
                         case 11:
-                          result = _context.sent;
+                          result = _context2.sent;
                           bailIfEnded(bailSignal);
 
                           if (!state.paused) {
-                            _context.next = 16;
+                            _context2.next = 16;
                             break;
                           }
 
-                          _context.next = 16;
-                          return new Promise(function (resume) {
+                          _context2.next = 16;
+                          return new _Promise(function (resume) {
                             state.resumeQueue.add(resume);
                           });
 
                         case 16:
-                          return _context.abrupt("return", result);
+                          return _context2.abrupt("return", result);
 
                         case 17:
                         case "end":
-                          return _context.stop();
+                          return _context2.stop();
                       }
                     }
                   }, _callee);
@@ -2319,64 +2395,64 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
               };
 
               if (!shared.Globals.skipAnimation) {
-                _context3.next = 9;
+                _context4.next = 9;
                 break;
               }
 
               stopAsync(state);
-              return _context3.abrupt("return", getFinishedResult(target, false));
+              return _context4.abrupt("return", getFinishedResult(target, false));
 
             case 9:
-              _context3.prev = 9;
+              _context4.prev = 9;
 
               if (shared.is.arr(to)) {
                 animating = function () {
                   var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2(queue) {
                     var _iterator2, _step2, _props;
 
-                    return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+                    return _regeneratorRuntime.wrap(function _callee2$(_context3) {
                       while (1) {
-                        switch (_context2.prev = _context2.next) {
+                        switch (_context3.prev = _context3.next) {
                           case 0:
                             _iterator2 = _createForOfIteratorHelper(queue);
-                            _context2.prev = 1;
+                            _context3.prev = 1;
 
                             _iterator2.s();
 
                           case 3:
                             if ((_step2 = _iterator2.n()).done) {
-                              _context2.next = 9;
+                              _context3.next = 9;
                               break;
                             }
 
                             _props = _step2.value;
-                            _context2.next = 7;
+                            _context3.next = 7;
                             return animate(_props);
 
                           case 7:
-                            _context2.next = 3;
+                            _context3.next = 3;
                             break;
 
                           case 9:
-                            _context2.next = 14;
+                            _context3.next = 14;
                             break;
 
                           case 11:
-                            _context2.prev = 11;
-                            _context2.t0 = _context2["catch"](1);
+                            _context3.prev = 11;
+                            _context3.t0 = _context3["catch"](1);
 
-                            _iterator2.e(_context2.t0);
+                            _iterator2.e(_context3.t0);
 
                           case 14:
-                            _context2.prev = 14;
+                            _context3.prev = 14;
 
                             _iterator2.f();
 
-                            return _context2.finish(14);
+                            return _context3.finish(14);
 
                           case 17:
                           case "end":
-                            return _context2.stop();
+                            return _context3.stop();
                         }
                       }
                     }, _callee2, null, [[1, 11, 14, 17]]);
@@ -2387,45 +2463,45 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                   };
                 }()(to);
               } else {
-                animating = Promise.resolve(to(animate, target.stop.bind(target)));
+                animating = _Promise.resolve(to(animate, target.stop.bind(target)));
               }
 
-              _context3.next = 13;
-              return Promise.all([animating.then(preventBail), bailPromise]);
+              _context4.next = 13;
+              return _Promise.all([animating.then(preventBail), bailPromise]);
 
             case 13:
               result = getFinishedResult(target.get(), true, false);
-              _context3.next = 27;
+              _context4.next = 27;
               break;
 
             case 16:
-              _context3.prev = 16;
-              _context3.t0 = _context3["catch"](9);
+              _context4.prev = 16;
+              _context4.t0 = _context4["catch"](9);
 
-              if (!(_context3.t0 instanceof BailSignal)) {
-                _context3.next = 22;
+              if (!(_context4.t0 instanceof BailSignal)) {
+                _context4.next = 22;
                 break;
               }
 
-              result = _context3.t0.result;
-              _context3.next = 27;
+              result = _context4.t0.result;
+              _context4.next = 27;
               break;
 
             case 22:
-              if (!(_context3.t0 instanceof SkipAniamtionSignal)) {
-                _context3.next = 26;
+              if (!(_context4.t0 instanceof SkipAniamtionSignal)) {
+                _context4.next = 26;
                 break;
               }
 
-              result = _context3.t0.result;
-              _context3.next = 27;
+              result = _context4.t0.result;
+              _context4.next = 27;
               break;
 
             case 26:
-              throw _context3.t0;
+              throw _context4.t0;
 
             case 27:
-              _context3.prev = 27;
+              _context4.prev = 27;
 
               if (callId == state.asyncId) {
                 state.asyncId = parentId;
@@ -2433,7 +2509,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 state.promise = parentId ? prevPromise : undefined;
               }
 
-              return _context3.finish(27);
+              return _context4.finish(27);
 
             case 30:
               if (shared.is.fun(onRest)) {
@@ -2442,11 +2518,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 });
               }
 
-              return _context3.abrupt("return", result);
+              return _context4.abrupt("return", result);
 
             case 32:
             case "end":
-              return _context3.stop();
+              return _context4.stop();
           }
         }
       }, _callee3, null, [[9, 16, 27, 30]]);
@@ -2511,6 +2587,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var _super3 = _createSuper$1(FrameValue);
 
     function FrameValue() {
+      var _context5;
+
       var _this3;
 
       _classCallCheck(this, FrameValue);
@@ -2519,7 +2597,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         args[_key2] = arguments[_key2];
       }
 
-      _this3 = _super3.call.apply(_super3, [this].concat(args));
+      _this3 = _super3.call.apply(_super3, _concatInstanceProperty(_context5 = [this]).call(_context5, args));
       _this3.id = nextId$1++;
       _this3.key = void 0;
       _this3._priority = 0;
@@ -2600,7 +2678,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       key: "_onPriorityChange",
       value: function _onPriorityChange(priority) {
         if (!this.idle) {
-          shared.frameLoop.sort(this);
+          var _context6;
+
+          _sortInstanceProperty(_context6 = shared.frameLoop).call(_context6, this);
         }
 
         shared.callFluidObservers(this, {
@@ -2614,7 +2694,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     return FrameValue;
   }(shared.FluidValue);
 
-  var $P = Symbol.for('SpringPhase');
+  var $P = _Symbol$for('SpringPhase');
+
   var HAS_ANIMATED = 1;
   var IS_ANIMATING = 2;
   var IS_PAUSED = 4;
@@ -2656,11 +2737,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       _this4.defaultProps = {};
       _this4._state = {
         paused: false,
-        pauseQueue: new Set(),
-        resumeQueue: new Set(),
-        timeouts: new Set()
+        pauseQueue: new _Set(),
+        resumeQueue: new _Set(),
+        timeouts: new _Set()
       };
-      _this4._pendingCalls = new Set();
+      _this4._pendingCalls = new _Set();
       _this4._lastCallId = 0;
       _this4._lastToId = 0;
       _this4._memoizedDuration = 0;
@@ -2693,8 +2774,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }, {
       key: "velocity",
       get: function get() {
+        var _context7;
+
         var node = animated$1.getAnimated(this);
-        return node instanceof animated$1.AnimatedValue ? node.lastVelocity || 0 : node.getPayload().map(function (node) {
+        return node instanceof animated$1.AnimatedValue ? node.lastVelocity || 0 : _mapInstanceProperty(_context7 = node.getPayload()).call(_context7, function (node) {
           return node.lastVelocity || 0;
         });
       }
@@ -2729,7 +2812,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           toValues = shared.toArray(shared.getFluidValue(anim.to));
         }
 
-        anim.values.forEach(function (node, i) {
+        _valuesInstanceProperty(anim).forEach(function (node, i) {
           if (node.done) return;
           var to = node.constructor == animated$1.AnimatedString ? 1 : payload ? payload[i].lastPosition : toValues[i];
           var finished = anim.immediate;
@@ -2817,7 +2900,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
             node.lastVelocity = velocity;
 
-            if (Number.isNaN(position)) {
+            if (_Number$isNaN(position)) {
               console.warn("Got NaN while animating:", _this5);
               finished = true;
             }
@@ -2837,6 +2920,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             changed = true;
           }
         });
+
         var node = animated$1.getAnimated(this);
         var currVal = node.getValue();
 
@@ -2929,7 +3013,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           this.queue = [];
         }
 
-        return Promise.all(queue.map(function (props) {
+        return _Promise.all(_mapInstanceProperty(queue).call(queue, function (props) {
           return _this8._update(props);
         })).then(function (results) {
           return getCombinedResult(_this8, results);
@@ -2990,7 +3074,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         };
 
         if (!hasAnimated(this)) {
-          if (props.reverse) {
+          if (_reverseInstanceProperty(props)) {
             var _ref6 = [from, to];
             to = _ref6[0];
             from = _ref6[1];
@@ -3016,7 +3100,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
         var key = this.key,
             defaultProps = this.defaultProps;
-        if (props.default) Object.assign(defaultProps, getDefaultProps(props, function (value, prop) {
+        if (props.default) _Object$assign(defaultProps, getDefaultProps(props, function (value, prop) {
           return /^on/.test(prop) ? resolveProp(value, key) : value;
         }));
         mergeActiveFn(this, props, 'onProps');
@@ -3024,7 +3108,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
         var range = this._prepareNode(props);
 
-        if (Object.isFrozen(this)) {
+        if (_Object$isFrozen(this)) {
           throw Error('Cannot animate a `SpringValue` object that is frozen. ' + 'Did you forget to pass your component to `animated(...)` before animating its props?');
         }
 
@@ -3103,7 +3187,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           to = from;
         }
 
-        if (props.reverse) {
+        if (_reverseInstanceProperty(props)) {
           var _ref7 = [from, to];
           to = _ref7[0];
           from = _ref7[1];
@@ -3151,9 +3235,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           var nodeType = animated$1.getAnimatedType(to);
 
           if (nodeType !== node.constructor) {
+            var _context8;
+
             if (immediate) {
               node = this._set(goal);
-            } else throw Error("Cannot animate between ".concat(node.constructor.name, " and ").concat(nodeType.name, ", as the \"to\" prop suggests"));
+            } else throw Error(_concatInstanceProperty(_context8 = "Cannot animate between ".concat(node.constructor.name, " and ")).call(_context8, nodeType.name, ", as the \"to\" prop suggests"));
           }
         }
 
@@ -3335,7 +3421,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         animated$1.getAnimated(this).reset(shared.getFluidValue(anim.to));
 
         if (!anim.immediate) {
-          anim.fromValues = anim.values.map(function (node) {
+          var _context9;
+
+          anim.fromValues = _mapInstanceProperty(_context9 = _valuesInstanceProperty(anim)).call(_context9, function (node) {
             return node.lastPosition;
           });
         }
@@ -3363,7 +3451,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         if (isAnimating(this)) {
           setActiveBit(this, false);
           var anim = this.animation;
-          shared.each(anim.values, function (node) {
+          shared.each(_valuesInstanceProperty(anim), function (node) {
             node.done = true;
           });
 
@@ -3402,7 +3490,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     if (loopRet) {
       var overrides = loopRet !== true && inferTo(loopRet);
-      var reverse = (overrides || props).reverse;
+
+      var reverse = _reverseInstanceProperty(overrides || props);
+
       var reset = !overrides || overrides.reset;
       return createUpdate(_extends({}, props, {
         loop: loop,
@@ -3420,10 +3510,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         to = _props2.to,
         from = _props2.from;
 
-    var keys = new Set();
+    var keys = new _Set();
     if (shared.is.obj(to)) findDefined(to, keys);
     if (shared.is.obj(from)) findDefined(from, keys);
-    props.keys = keys.size ? Array.from(keys) : null;
+    props.keys = keys.size ? _Array$from(keys) : null;
     return props;
   }
 
@@ -3450,7 +3540,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }
 
   function sendEvent(target, type) {
-    var _target$animation$typ2, _target$defaultProps$2;
+    var _target$animation$typ2, _context10, _target$defaultProps$2, _context11;
 
     var _target$animation$typ, _target$animation, _target$defaultProps$, _target$defaultProps;
 
@@ -3458,8 +3548,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       args[_key5 - 2] = arguments[_key5];
     }
 
-    (_target$animation$typ = (_target$animation = target.animation)[type]) == null ? void 0 : (_target$animation$typ2 = _target$animation$typ).call.apply(_target$animation$typ2, [_target$animation].concat(args));
-    (_target$defaultProps$ = (_target$defaultProps = target.defaultProps)[type]) == null ? void 0 : (_target$defaultProps$2 = _target$defaultProps$).call.apply(_target$defaultProps$2, [_target$defaultProps].concat(args));
+    (_target$animation$typ = (_target$animation = target.animation)[type]) == null ? void 0 : (_target$animation$typ2 = _target$animation$typ).call.apply(_target$animation$typ2, _concatInstanceProperty(_context10 = [_target$animation]).call(_context10, args));
+    (_target$defaultProps$ = (_target$defaultProps = target.defaultProps)[type]) == null ? void 0 : (_target$defaultProps$2 = _target$defaultProps$).call.apply(_target$defaultProps$2, _concatInstanceProperty(_context11 = [_target$defaultProps]).call(_context11, args));
   }
 
   var BATCHED_EVENTS = ['onStart', 'onChange', 'onRest'];
@@ -3476,20 +3566,20 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this._flush = void 0;
       this._initialProps = void 0;
       this._lastAsyncId = 0;
-      this._active = new Set();
-      this._changed = new Set();
+      this._active = new _Set();
+      this._changed = new _Set();
       this._started = false;
       this._item = void 0;
       this._state = {
         paused: false,
-        pauseQueue: new Set(),
-        resumeQueue: new Set(),
-        timeouts: new Set()
+        pauseQueue: new _Set(),
+        resumeQueue: new _Set(),
+        timeouts: new _Set()
       };
       this._events = {
-        onStart: new Map(),
-        onChange: new Map(),
-        onRest: new Map()
+        onStart: new _Map(),
+        onChange: new _Map(),
+        onRest: new _Map()
       };
       this._onFrame = this._onFrame.bind(this);
 
@@ -3507,7 +3597,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     _createClass(Controller, [{
       key: "idle",
       get: function get() {
-        return !this._state.asyncTo && Object.values(this.springs).every(function (spring) {
+        return !this._state.asyncTo && _Object$values(this.springs).every(function (spring) {
           return spring.idle;
         });
       }
@@ -3554,7 +3644,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         var queue = this.queue;
 
         if (props) {
-          queue = shared.toArray(props).map(createUpdate);
+          var _context12;
+
+          queue = _mapInstanceProperty(_context12 = shared.toArray(props)).call(_context12, createUpdate);
         } else {
           this.queue = [];
         }
@@ -3695,7 +3787,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }();
 
   function flushUpdateQueue(ctrl, queue) {
-    return Promise.all(queue.map(function (props) {
+    return _Promise.all(_mapInstanceProperty(queue).call(queue, function (props) {
       return flushUpdate(ctrl, props);
     })).then(function (results) {
       return getCombinedResult(ctrl, results);
@@ -3708,12 +3800,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   function _flushUpdate() {
     _flushUpdate = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee4(ctrl, props, isLoop) {
+      var _context16;
+
       var keys, to, from, loop, onRest, onResolve, defaults, asyncTo, state, promises, cancel, result, nextProps;
-      return _regeneratorRuntime.wrap(function _callee4$(_context4) {
+      return _regeneratorRuntime.wrap(function _callee4$(_context17) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context17.prev = _context17.next) {
             case 0:
-              keys = props.keys, to = props.to, from = props.from, loop = props.loop, onRest = props.onRest, onResolve = props.onResolve;
+              keys = _keysInstanceProperty(props), to = props.to, from = props.from, loop = props.loop, onRest = props.onRest, onResolve = props.onResolve;
               defaults = shared.is.obj(props.default) && props.default;
 
               if (loop) {
@@ -3771,7 +3865,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 props.pause = true;
               }
 
-              promises = (keys || Object.keys(ctrl.springs)).map(function (key) {
+              promises = _mapInstanceProperty(_context16 = keys || _Object$keys(ctrl.springs)).call(_context16, function (key) {
                 return ctrl.springs[key].start(props);
               });
               cancel = props.cancel === true || getDefaultProp(props, 'cancel') === true;
@@ -3797,39 +3891,39 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
               }
 
               if (!state.paused) {
-                _context4.next = 15;
+                _context17.next = 15;
                 break;
               }
 
-              _context4.next = 15;
-              return new Promise(function (resume) {
+              _context17.next = 15;
+              return new _Promise(function (resume) {
                 state.resumeQueue.add(resume);
               });
 
             case 15:
-              _context4.t0 = getCombinedResult;
-              _context4.t1 = ctrl;
-              _context4.next = 19;
-              return Promise.all(promises);
+              _context17.t0 = getCombinedResult;
+              _context17.t1 = ctrl;
+              _context17.next = 19;
+              return _Promise.all(promises);
 
             case 19:
-              _context4.t2 = _context4.sent;
-              result = (0, _context4.t0)(_context4.t1, _context4.t2);
+              _context17.t2 = _context17.sent;
+              result = (0, _context17.t0)(_context17.t1, _context17.t2);
 
               if (!(loop && result.finished && !(isLoop && result.noop))) {
-                _context4.next = 26;
+                _context17.next = 26;
                 break;
               }
 
               nextProps = createLoopUpdate(props, loop, to);
 
               if (!nextProps) {
-                _context4.next = 26;
+                _context17.next = 26;
                 break;
               }
 
               prepareKeys(ctrl, [nextProps]);
-              return _context4.abrupt("return", flushUpdate(ctrl, nextProps, true));
+              return _context17.abrupt("return", flushUpdate(ctrl, nextProps, true));
 
             case 26:
               if (onResolve) {
@@ -3838,11 +3932,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
                 });
               }
 
-              return _context4.abrupt("return", result);
+              return _context17.abrupt("return", result);
 
             case 28:
             case "end":
-              return _context4.stop();
+              return _context17.stop();
           }
         }
       }, _callee4);
@@ -3855,7 +3949,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     if (props) {
       shared.each(shared.toArray(props), function (props) {
-        if (shared.is.und(props.keys)) {
+        if (shared.is.und(_keysInstanceProperty(props))) {
           props = createUpdate(props);
         }
 
@@ -3896,8 +3990,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }
 
   function prepareSprings(springs, props, create) {
-    if (props.keys) {
-      shared.each(props.keys, function (key) {
+    if (_keysInstanceProperty(props)) {
+      shared.each(_keysInstanceProperty(props), function (key) {
         var spring = springs[key] || (springs[key] = create(key));
         spring['_prepareNode'](props);
       });
@@ -3915,7 +4009,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   function _objectWithoutPropertiesLoose(source, excluded) {
     if (source == null) return {};
     var target = {};
-    var sourceKeys = Object.keys(source);
+
+    var sourceKeys = _Object$keys(source);
+
     var key, i;
 
     for (i = 0; i < sourceKeys.length; i++) {
@@ -3953,7 +4049,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   SpringContext.Consumer = ctx.Consumer;
 
   function makeContext(target, init) {
-    Object.assign(target, React__namespace.createContext(init));
+    _Object$assign(target, React__namespace.createContext(init));
+
     target.Provider._context = target;
     target.Consumer._context = target;
     return target;
@@ -3982,14 +4079,14 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     SpringRef.current = current;
 
     SpringRef.add = function (ctrl) {
-      if (!current.includes(ctrl)) {
+      if (!_includesInstanceProperty(current).call(current, ctrl)) {
         current.push(ctrl);
       }
     };
 
     SpringRef.delete = function (ctrl) {
       var i = current.indexOf(ctrl);
-      if (~i) current.splice(i, 1);
+      if (~i) _spliceInstanceProperty(current).call(current, i, 1);
     };
 
     SpringRef.pause = function () {
@@ -4058,7 +4155,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   };
 
   function useSprings(length, props, deps) {
-    var _arguments4 = arguments;
+    var _arguments4 = arguments,
+        _context14;
+
     var propsFn = shared.is.fun(props) && props;
     if (propsFn && !deps) deps = [];
     var ref = React.useMemo(function () {
@@ -4072,10 +4171,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         queue: [],
         flush: function flush(ctrl, updates) {
           var springs = getSprings(ctrl, updates);
-          var canFlushSync = layoutId.current > 0 && !state.queue.length && !Object.keys(springs).some(function (key) {
+          var canFlushSync = layoutId.current > 0 && !state.queue.length && !_Object$keys(springs).some(function (key) {
             return !ctrl.springs[key];
           });
-          return canFlushSync ? flushUpdateQueue(ctrl, updates) : new Promise(function (resolve) {
+          return canFlushSync ? flushUpdateQueue(ctrl, updates) : new _Promise(function (resolve) {
             setSprings(ctrl, springs);
             state.queue.push(function () {
               resolve(flushUpdateQueue(ctrl, updates));
@@ -4089,7 +4188,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var updates = [];
     var prevLength = shared.usePrev(length) || 0;
     React.useMemo(function () {
-      shared.each(ctrls.current.slice(length, prevLength), function (ctrl) {
+      var _context13;
+
+      shared.each(_sliceInstanceProperty(_context13 = ctrls.current).call(_context13, length, prevLength), function (ctrl) {
         detachRefs(ctrl, ref);
         ctrl.stop(true);
       });
@@ -4112,9 +4213,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     }
 
-    var springs = ctrls.current.map(function (ctrl, i) {
+    var springs = _mapInstanceProperty(_context14 = ctrls.current).call(_context14, function (ctrl, i) {
       return getSprings(ctrl, updates[i]);
     });
+
     var context = React.useContext(SpringContext);
     var prevContext = shared.usePrev(context);
     var hasContext = context !== prevContext && hasProps(context);
@@ -4159,9 +4261,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         });
       };
     });
-    var values = springs.map(function (x) {
+
+    var values = _mapInstanceProperty(springs).call(springs, function (x) {
       return _extends({}, x);
     });
+
     return ref ? [values, ref] : values;
   }
 
@@ -4191,7 +4295,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var reverse = true;
     var result = useSprings(length, function (i, ctrl) {
       var props = propsFn ? propsFn(i, ctrl) : propsArg;
-      reverse = reverse && props.reverse;
+      reverse = reverse && _reverseInstanceProperty(props);
       return props;
     }, deps || [{}]);
     var ref = result[1];
@@ -4209,7 +4313,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         var props = shared.is.fun(propsArg) ? propsArg(i, ctrl) : propsArg;
 
         if (props) {
-          var parent = ref.current[i + (props.reverse ? 1 : -1)];
+          var parent = ref.current[i + (_reverseInstanceProperty(props) ? 1 : -1)];
           if (parent) props.to = parent.springs;
           return props;
         }
@@ -4236,7 +4340,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
     var _ref14 = propsFn ? propsFn() : props,
         reset = _ref14.reset,
-        sort = _ref14.sort,
+        sort = _sortInstanceProperty(_ref14),
         _ref14$trail = _ref14.trail,
         trail = _ref14$trail === void 0 ? 0 : _ref14$trail,
         _ref14$expires = _ref14.expires,
@@ -4315,13 +4419,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             item: items[keyIndex]
           });
         } else if (leave) {
-          transitions.splice(++i, 0, t);
+          _spliceInstanceProperty(transitions).call(transitions, ++i, 0, t);
         }
       });
     }
 
     if (shared.is.fun(sort)) {
-      transitions.sort(function (a, b) {
+      _sortInstanceProperty(transitions).call(transitions, function (a, b) {
         return sort(a.item, b.item);
       });
     }
@@ -4329,7 +4433,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var delay = -trail;
     var forceUpdate = shared.useForceUpdate();
     var defaultProps = getDefaultProps(props);
-    var changes = new Map();
+    var changes = new _Map();
     shared.each(transitions, function (t, i) {
       var key = t.key;
       var prevPhase = t.phase;
@@ -4389,9 +4493,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       payload.onResolve = function (result) {
         callProp(onResolve, result);
         var transitions = usedTransitions.current;
-        var t = transitions.find(function (t) {
+
+        var t = _findInstanceProperty(transitions).call(transitions, function (t) {
           return t.key === key;
         });
+
         if (!t) return;
 
         if (result.cancelled && t.phase != TransitionPhase.UPDATE) {
@@ -4469,7 +4575,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }, reset ? void 0 : deps);
 
     var renderTransitions = function renderTransitions(render) {
-      return React__namespace.createElement(React__namespace.Fragment, null, transitions.map(function (t, i) {
+      return React__namespace.createElement(React__namespace.Fragment, null, _mapInstanceProperty(transitions).call(transitions, function (t, i) {
         var _ref18 = changes.get(t) || t.ctrl,
             springs = _ref18.springs;
 
@@ -4488,13 +4594,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   function getKeys(items, _ref19, prevTransitions) {
     var key = _ref19.key,
-        _ref19$keys = _ref19.keys,
+        _ref19$keys = _keysInstanceProperty(_ref19),
         keys = _ref19$keys === void 0 ? key : _ref19$keys;
 
     if (keys === null) {
-      var reused = new Set();
-      return items.map(function (item) {
-        var t = prevTransitions && prevTransitions.find(function (t) {
+      var reused = new _Set();
+      return _mapInstanceProperty(items).call(items, function (item) {
+        var t = prevTransitions && _findInstanceProperty(prevTransitions).call(prevTransitions, function (t) {
           return t.item === item && t.phase !== TransitionPhase.LEAVE && !reused.has(t);
         });
 
@@ -4507,7 +4613,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       });
     }
 
-    return shared.is.und(keys) ? items : shared.is.fun(keys) ? items.map(keys) : shared.toArray(keys);
+    return shared.is.und(keys) ? items : shared.is.fun(keys) ? _mapInstanceProperty(items).call(items, keys) : shared.toArray(keys);
   }
 
   var _excluded$2 = ["children"];
@@ -4527,7 +4633,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         props = _objectWithoutPropertiesLoose(_ref, _excluded$1);
 
     var trails = useTrail(items.length, props);
-    return items.map(function (item, index) {
+    return _mapInstanceProperty(items).call(items, function (item, index) {
       var result = children(item, index);
       return shared.is.fun(result) ? result(trails[index]) : result;
     });
@@ -4557,7 +4663,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       _this16.key = void 0;
       _this16.idle = true;
       _this16.calc = void 0;
-      _this16._active = new Set();
+      _this16._active = new _Set();
       _this16.source = source;
       _this16.calc = shared.createInterpolator.apply(shared, _toConsumableArray(args));
 
@@ -4588,7 +4694,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }, {
       key: "_get",
       value: function _get() {
-        var inputs = shared.is.arr(this.source) ? this.source.map(shared.getFluidValue) : shared.toArray(shared.getFluidValue(this.source));
+        var _context15;
+
+        var inputs = shared.is.arr(this.source) ? _mapInstanceProperty(_context15 = this.source).call(_context15, shared.getFluidValue) : shared.toArray(shared.getFluidValue(this.source));
         return this.calc.apply(this, _toConsumableArray(inputs));
       }
     }, {
@@ -4679,7 +4787,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   }
 
   function checkIdle(active) {
-    return !active.size || Array.from(active).every(isIdle);
+    return !active.size || _Array$from(active).every(isIdle);
   }
 
   function becomeIdle(self) {
@@ -4751,7 +4859,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   exports.useSprings = useSprings;
   exports.useTrail = useTrail;
   exports.useTransition = useTransition;
-  Object.keys(animated).forEach(function (k) {
+
+  _Object$keys(animated).forEach(function (k) {
     if (k !== 'default' && !exports.hasOwnProperty(k)) Object.defineProperty(exports, k, {
       enumerable: true,
       get: function get() {
@@ -4759,7 +4868,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
     });
   });
-  Object.keys(interpolation).forEach(function (k) {
+
+  _Object$keys(interpolation).forEach(function (k) {
     if (k !== 'default' && !exports.hasOwnProperty(k)) Object.defineProperty(exports, k, {
       enumerable: true,
       get: function get() {
@@ -4769,9 +4879,9 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   });
 })(reactSpringCore_cjs_prod);
 
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = _Reflect$construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !_Reflect$construct) return false; if (_Reflect$construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(_Reflect$construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 (function (exports) {
 
@@ -4786,7 +4896,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
   function _objectWithoutPropertiesLoose(source, excluded) {
     if (source == null) return {};
     var target = {};
-    var sourceKeys = Object.keys(source);
+
+    var sourceKeys = _Object$keys(source);
+
     var key, i;
 
     for (i = 0; i < sourceKeys.length; i++) {
@@ -4802,14 +4914,18 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
   var isCustomPropRE = /^--/;
 
   function dangerousStyleValue(name, value) {
+    var _context;
+
     if (value == null || typeof value === 'boolean' || value === '') return '';
     if (typeof value === 'number' && value !== 0 && !isCustomPropRE.test(name) && !(isUnitlessNumber.hasOwnProperty(name) && isUnitlessNumber[name])) return value + 'px';
-    return ('' + value).trim();
+    return _trimInstanceProperty(_context = '' + value).call(_context);
   }
 
   var attributeCache = {};
 
   function applyAnimatedValues(instance, props) {
+    var _context2;
+
     if (!instance.nodeType || !instance.setAttribute) {
       return false;
     }
@@ -4823,8 +4939,9 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
         scrollLeft = _ref.scrollLeft,
         attributes = _objectWithoutPropertiesLoose(_ref, _excluded$2);
 
-    var values = Object.values(attributes);
-    var names = Object.keys(attributes).map(function (name) {
+    var values = _Object$values(attributes);
+
+    var names = _mapInstanceProperty(_context2 = _Object$keys(attributes)).call(_context2, function (name) {
       return isFilterElement || instance.hasAttribute(name) ? name : attributeCache[name] || (attributeCache[name] = name.replace(/([A-Z])/g, function (n) {
         return '-' + n.toLowerCase();
       }));
@@ -4908,7 +5025,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
   };
 
   var prefixes = ['Webkit', 'Ms', 'Moz', 'O'];
-  isUnitlessNumber = Object.keys(isUnitlessNumber).reduce(function (acc, prop) {
+  isUnitlessNumber = _Object$keys(isUnitlessNumber).reduce(function (acc, prop) {
     prefixes.forEach(function (prefix) {
       return acc[prefixKey(prefix, prop)] = acc[prop];
     });
@@ -4948,7 +5065,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
       if (x || y || z) {
         inputs.push([x || 0, y || 0, z || 0]);
         transforms.push(function (xyz) {
-          return ["translate3d(".concat(xyz.map(function (v) {
+          return ["translate3d(".concat(_mapInstanceProperty(xyz).call(xyz, function (v) {
             return addUnit(v, 'px');
           }).join(','), ")"), isValueIdentity(xyz, 0)];
         });
@@ -4966,17 +5083,21 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
           var unit = pxTransforms.test(key) ? 'px' : degTransforms.test(key) ? 'deg' : '';
           inputs.push(shared.toArray(value));
           transforms.push(key === 'rotate3d' ? function (_ref2) {
+            var _context3, _context4, _context5;
+
             var _ref3 = _slicedToArray(_ref2, 4),
                 x = _ref3[0],
                 y = _ref3[1],
                 z = _ref3[2],
                 deg = _ref3[3];
 
-            return ["rotate3d(".concat(x, ",").concat(y, ",").concat(z, ",").concat(addUnit(deg, unit), ")"), isValueIdentity(deg, 0)];
+            return [_concatInstanceProperty(_context3 = _concatInstanceProperty(_context4 = _concatInstanceProperty(_context5 = "rotate3d(".concat(x, ",")).call(_context5, y, ",")).call(_context4, z, ",")).call(_context3, addUnit(deg, unit), ")"), isValueIdentity(deg, 0)];
           } : function (input) {
-            return ["".concat(key, "(").concat(input.map(function (v) {
+            var _context6;
+
+            return [_concatInstanceProperty(_context6 = "".concat(key, "(")).call(_context6, _mapInstanceProperty(input).call(input, function (v) {
               return addUnit(v, unit);
-            }).join(','), ")"), isValueIdentity(input, key.startsWith('scale') ? 1 : 0)];
+            }).join(','), ")"), isValueIdentity(input, _startsWithInstanceProperty(key).call(key, 'scale') ? 1 : 0)];
           });
         }
       });
@@ -5023,7 +5144,7 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
         shared.each(this.inputs, function (input, i) {
           var arg1 = shared.getFluidValue(input[0]);
 
-          var _this2$transforms$i = _this2.transforms[i](shared.is.arr(arg1) ? arg1 : input.map(shared.getFluidValue)),
+          var _this2$transforms$i = _this2.transforms[i](shared.is.arr(arg1) ? arg1 : _mapInstanceProperty(input).call(input, shared.getFluidValue)),
               _this2$transforms$i2 = _slicedToArray(_this2$transforms$i, 2),
               t = _this2$transforms$i2[0],
               id = _this2$transforms$i2[1];
@@ -5090,7 +5211,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
   var animated = host.animated;
   exports.a = animated;
   exports.animated = animated;
-  Object.keys(core).forEach(function (k) {
+
+  _Object$keys(core).forEach(function (k) {
     if (k !== 'default' && !exports.hasOwnProperty(k)) Object.defineProperty(exports, k, {
       enumerable: true,
       get: function get() {
